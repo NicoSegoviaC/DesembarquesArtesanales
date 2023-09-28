@@ -1,1 +1,1 @@
-web: gunicorn PreciosPlaya_Dash:server
+web: gunicorn desembarquesSernapesca:server
