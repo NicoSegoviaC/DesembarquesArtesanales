@@ -25,11 +25,13 @@ regiones = sorted([r for r in df["REGION"].unique() if isinstance(r, str)])
 # Definir la estructura de la app
 app.layout = html.Div([
   
-    # Encabezado con el título y el logo
+    # Encabezado con el título y los logos
     html.Div([
-        html.H1('Desembarques pesqueros artesanales (2000-2022)', style={'display': 'inline-block', 'margin-right': '20px'}),
-        html.Img(src='/assets/DC_Logo.png', style={'height':'15%', 'width':'15%', 'display': 'inline-block'}),
+        html.H1('Desembarques pesqueros artesanales (2000-2022)', style={'display': 'inline-block', 'margin-right': 'px'}),
+        html.Img(src='/assets/DC_Logo.png', style={'height':'15%', 'width':'15%', 'display': 'inline-block', 'margin-right': '20px'}), # Logo 1
+        html.Img(src='/assets/infografia-pesqueria-artesanal.png', style={'height':'10%', 'width':'10%', 'display': 'inline-block'}), # Logo 2
     ], style={'display': 'flex', 'align-items': 'center', 'justify-content': 'center'}),
+
     dcc.Dropdown(
         id='nivel-dropdown',
         options=[{'label': 'Nivel nacional', 'value': 'Nivel nacional'},
@@ -81,7 +83,7 @@ def update_figure(selected_especie, nivel, region, year_start, year_end):
     if df_especie.empty:
         return go.Figure(
             layout=go.Layout(
-                title=f"Sin registros de desembarque para {selected_especie} para el rango solicitado"
+                title=f"Sin registros de desembarque para {selected_especie} en el rango solicitado"
             )
         )
 
@@ -130,4 +132,4 @@ def toggle_region_dropdown(nivel):
 
 # Iniciar la app
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=True, port=8051)
